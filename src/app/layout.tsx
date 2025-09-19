@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Encode_Sans } from "next/font/google";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "./globals.css";
+import Footer from "./_Components/Footer/Footer";
+import { Toaster } from "@/components/ui/sonner";
+import UserProvider from "./_Components/UserProvider/UserProvider";
+import { ThemeProvider } from "next-themes";
+import CountProvider from "src/CountProvider";
+import WishProvider from "src/WishProvider";
+import { Navbar } from "./_Components/Navbar/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const Encode_Sansfont = Encode_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -19,15 +25,33 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        data-new-gr-c-s-check-loaded="14.1251.0"
+        data-gr-ext-installed=""
+        className= {` ${Encode_Sansfont.className}  bg-gradient-to-br from-white via-blue-100 to-purple-300 dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#2f3844] dark:to-[#3c1e50] flex flex-col justify-between text-black dark:text-white`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <UserProvider >
+            <WishProvider>
+              <CountProvider>
+              <Navbar />
+              <main className="p-5">
+                {children}
+                <Toaster />
+              </main>
+              <Footer />
+            </CountProvider>
+            </WishProvider>
+          </UserProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
