@@ -16,7 +16,7 @@ export default async function Home() {
    <MainSlider/>
    
    
-   <div className='grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-5'>
+   <div className='grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-5 my-5'>
     
       {
       ProductList.map((item)=>{
